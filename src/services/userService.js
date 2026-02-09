@@ -16,6 +16,6 @@ const index = async () => {
     console.log(error);
     throw new Error(error);
     }
-
-
 }
+
+export {index}
