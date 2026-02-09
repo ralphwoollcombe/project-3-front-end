@@ -4,6 +4,8 @@ import Home from './components/Home'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import SignOut from './components/SignOut'
+import Countries from './components/Countries/Countries'
+
 
 
 const App = () => {
@@ -16,6 +18,7 @@ const App = () => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-out" element={<SignOut />} />
+        <Route path="/countries" element={<Countries />} />
       </Routes>
     </>
   )
