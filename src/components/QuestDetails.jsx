@@ -1,7 +1,7 @@
-import { useParams } from "react-router";
-import * as questService from '../../services/questService'
+import { useParams } from "react-router-dom";
+import * as questService from '../services/questService.js'
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const QuestDetails = () => {
     const [quest, setQuest] = useState(null);
@@ -11,7 +11,7 @@ const QuestDetails = () => {
 
     useEffect(() => {
         const fetchQuest = async () => {
-            const questData = await questService.show(questId)
+            const questData = await questService.show(user._id, questId)
             setQuest(questData)
         }
         fetchQuest();
@@ -20,9 +20,11 @@ const QuestDetails = () => {
         <main>
             <title>My quest through {quest.country.name}</title>
             <section>
-                <
+                
             </section>
             {quest}
         </main>
     )
 }
+
+export default QuestDetails
