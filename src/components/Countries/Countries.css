@@ -39,7 +39,7 @@
 .buttons-layer{
   position: absolute;
   inset: 0;
-  transform: translateY(29%); /* 👈 aumenta/diminuisci */
+  transform: translateY(29%);
   pointer-events: none;
 }
 .buttons-layer .continent{
