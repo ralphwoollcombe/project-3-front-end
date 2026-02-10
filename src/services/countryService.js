@@ -1,13 +1,20 @@
-const BASE_URL = 'https://restcountries.com/v3.1'
+const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
-const getByRegion = async (region) => {
-  const res = await fetch(
-    `${BASE_URL}/region/${region}?fields=name,flags,cca2,cca3`
-  )
+const index = async () => {
+  try {
+    const res = await fetch(`${BASE_URL}/countries`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
 
-  if (!res.ok) throw new Error('Failed to fetch countries')
+    if (!res.ok) throw new Error('Failed to fetch countries');
 
-  return res.json()
-}
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
-export { getByRegion }
+export { index };

@@ -1,7 +1,6 @@
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
 import NavBar from './components/NavBar'
-import Home from './components/Home'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import SignOut from './components/SignOut'
@@ -15,14 +14,12 @@ import QuestList from './components/QuestList'
 import QuestForm from './components/QuestForm'
 
 import * as questService from './services/questService';
-import * as cuntryService from './services/cuntryService';
 import { AuthContext } from './contexts/AuthContext';
 
 
 const App = () => {
   const { user } = useContext(AuthContext);
   const [quests, setQuests] = useState([]);
-  const countries = fetch
   const navigate = useNavigate();
 
   const addQuest = async (questFormData) => {
