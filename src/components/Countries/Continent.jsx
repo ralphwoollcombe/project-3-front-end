@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './Continent.css'
-import * as countryService from '../../services/flagService'
+import * as countryService from '../../services/fService'
 
 const normalizeRegion = (continentParam) => {
   if (continentParam === 'north-america' || continentParam === 'south-america') {
