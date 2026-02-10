@@ -15,7 +15,7 @@ import QuestList from './components/QuestList'
 import QuestForm from './components/QuestForm'
 
 import * as questService from './services/questService';
-import * as countryService from './services/countryService';
+import * as countryService from './services/cService';
 import { AuthContext } from './contexts/AuthContext';
 
 
