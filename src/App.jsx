@@ -12,17 +12,20 @@ import QuestList from './components/QuestList'
 import QuestForm from './components/QuestForm'
 
 import * as questService from './services/questService';
+import * as cuntryService from './services/cuntryService';
 import { AuthContext } from './contexts/AuthContext';
 
 
 const App = () => {
   const {user} = useContext(AuthContext);
   const [quests, setQuests] = useState([]);
+  const countries = fetch
   const navigate = useNavigate();
 
   const addQuest = async (questFormData) => {
-    const newQuest = await questService.create(questFormData)
+    const newQuest = await questService.create(questFormData, user._id)
     setQuests([...quests, newQuest])
+    console.log('these are all the quests', quests)
     navigate(`/users/${user._id}/quests`)
   }
   
@@ -50,7 +53,7 @@ useEffect(() => {
         <Route path="/countries" element={<Countries />} />
 
         <Route path="/users/:userId/quests" element={<QuestList quests={quests} />} />
-        <Route path="/quests/new" element={<QuestForm addQuest={addQuest} />} />
+        <Route path="/quests/new" element={<QuestForm addQuest={addQuest} countries={countries} />} />
       </Routes>
     </>
   )
