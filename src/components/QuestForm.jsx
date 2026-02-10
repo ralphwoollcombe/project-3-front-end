@@ -35,31 +35,36 @@ const [formData, setFormData] = useState({
     // country: ''
   })
 
-    const handleSubmit = async () => {
-        evt.preventDefault();
-        props.addQuest(formData);
-
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        await props.addQuest(formData);
     }
 
-    // const handleChange = (event) => {
-    //     const {name, value} = event.target
-    //     if (name.includes('.')) {
-    //         const [section, field] = name.split('.');
-    //         setFormData(...for)
-    //     setFormData({
-    //         ...formData, 
-    //         [event.target.name]: event.target.value
-    //     })
-    // }}
+    const handleChange = (event) => {
+    const {name, value} = event.target
+    const newValue = name.endsWith('rating') ? Number(value): value
+    if (name.includes('.')) {
+    const [section, field] = name.split('.');
+    setFormData({...formData, 
+        [section]: {...formData[section],
+            [field]: newValue
+        }})
+      } else {
+        setFormData({
+             ...formData, 
+             [event.target.name]: event.target.value
+           })
+      }
+    }
 
     // const handleColourChange = () => {
-
-    // }
+        //}
 
    return (
     <form onSubmit={handleSubmit}>
-        <label>General</label>
-          <input
+        <label htmlFor="general">General</label>
+          <textarea
+            id="general"
             type="text"
             name="general"
             value={formData.general}
@@ -70,12 +75,14 @@ const [formData, setFormData] = useState({
             <legend>Food</legend>
                 <label htmlFor="food.review"> Review:</label>
                     <input
+                        id="food.review"
                         name="food.review"
                         value={formData.food.review}
                         onChange={handleChange}
                     />
-                <label htmlFor="food.rating"> Review:</label>
+                <label htmlFor="food.rating"> Rating:</label>
                     <select
+                    id="food.rating"
                     name="food.rating"
                     value={formData.food.rating}
                     onChange={handleChange}
@@ -84,6 +91,7 @@ const [formData, setFormData] = useState({
             </select>
             <label htmlFor="food.story">Story:</label>
             <textarea
+                id="food.story"
                 name="food.story"
                 value={formData.food.story}
                 onChange={handleChange}
@@ -95,12 +103,14 @@ const [formData, setFormData] = useState({
             <legend>Experience</legend>
                 <label htmlFor="experience.review">Review:</label>
                 <input
+                    id="experience.review"
                     name="experience.review"
                     value={formData.experience.review}
                      onChange={handleChange}
                 />
                 <label htmlFor="experience.rating">Rating:</label>
                 <select
+                    id="experience.rating"
                     name="experience.rating"
                     value={formData.experience.rating}
                     onChange={handleChange}
@@ -109,6 +119,7 @@ const [formData, setFormData] = useState({
                 </select>
                 <label htmlFor="experience.story">Story:</label>
                 <textarea
+                    id="experience.story"
                     name="experience.story"
                     value={formData.experience.story}
                     onChange={handleChange}
@@ -120,12 +131,14 @@ const [formData, setFormData] = useState({
             <legend>Transport</legend>
                 <label htmlFor="transport.review">Review:</label>
                 <input
+                    id="transport.review"
                     name="transport.review"
                     value={formData.transport.review}
                     onChange={handleChange}
                 />
                 <label htmlFor="transport.rating">Rating:</label>
                 <select
+                    id="transport.rating"
                     name="transport.rating"
                     value={formData.transport.rating}
                     onChange={handleChange}
@@ -134,6 +147,7 @@ const [formData, setFormData] = useState({
                 </select>
                 <label htmlFor="transport.story">Story:</label>
                 <textarea
+                    id="transport.story"
                     name="transport.story"
                     value={formData.transport.story}
                     onChange={handleChange}
@@ -145,6 +159,7 @@ const [formData, setFormData] = useState({
             <legend>Nature</legend>
                 <label htmlFor="nature.review">Review:</label>
                 <input
+                    id="nature.review"
                     name="nature.review"
                     value={formData.nature.review}
                     onChange={handleChange}
@@ -152,6 +167,7 @@ const [formData, setFormData] = useState({
 
                 <label htmlFor="nature.rating">Rating:</label>
                 <select
+                    id="nature.rating"
                     name="nature.rating"
                     value={formData.nature.rating}
                     onChange={handleChange}
@@ -160,6 +176,7 @@ const [formData, setFormData] = useState({
                 </select>
                 <label htmlFor="nature.story">Story:</label>
                 <textarea
+                    id="nature.story"
                     name="nature.story"
                     value={formData.nature.story}
                     onChange={handleChange}
@@ -171,12 +188,14 @@ const [formData, setFormData] = useState({
             <legend>Music</legend>
                 <label htmlFor="music.review">Review:</label>
                 <input
+                    id="music.review"
                     name="music.review"
                     value={formData.music.review}
                     onChange={handleChange}
                 />
                 <label htmlFor="music.rating">Rating:</label>
                 <select
+                    id="music.rating"
                     name="music.rating"
                     value={formData.music.rating}
                     onChange={handleChange}
@@ -185,6 +204,7 @@ const [formData, setFormData] = useState({
                 </select>
                 <label htmlFor="music.story">Story:</label>
                 <textarea
+                    id="music.story"
                     name="music.story"
                     value={formData.music.story}
                     onChange={handleChange}
@@ -206,15 +226,15 @@ const [formData, setFormData] = useState({
             ))}
         </fieldset> */}
 
-        {/* <fieldset>
-            <legend>Country</legend>
-                <select name="country" value={formData.country} onChange={handleChange} required>
+        <fieldset>
+            <legend htmlFor="country">Country</legend>
+                <select id="country" name="country" value={formData.country} onChange={handleChange} required>
                 <option value="">Select a country</option>
-                {countries.map(country => (
+                {props.countries.map(country => (
                     <option key={country._id} name={country._id} value={country._id}>{country.name}</option>
                 ))}
                 </select>
-      </fieldset> */}
+      </fieldset>
 
       <button type="submit">Submit Quest</button>
     </form>
@@ -222,3 +242,9 @@ const [formData, setFormData] = useState({
 }
 
 export default QuestForm
+
+
+
+
+
+   
