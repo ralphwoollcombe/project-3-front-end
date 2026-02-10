@@ -1,3 +1,4 @@
+import js from "@eslint/js";
 
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`
 
@@ -27,4 +28,15 @@ const create = async (questFormData, userId) => {
     }
 }
 
-export {index, create}
+const show = async (questId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/users/${userId}/quests/${questId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},
+        });
+        const jsonRes = await res.json()
+        return jsonRes
+    } catch (error) {
+        console.log(error)
+    }
+}
+export {index, create, show}
