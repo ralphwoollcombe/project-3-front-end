@@ -1,0 +1,48 @@
+.countries-page {
+  text-align: center;
+}
+
+.map-container {
+    position: relative;
+}
+
+.world-map {
+  width: 100%;
+  display: block;
+}
+
+
+.continent{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.85);
+  color: #fff;
+  border: 0;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+
+
+.north-america { top: 22%; left: 20%; }
+.south-america { top: 44%; left: 28%; }
+
+.europe { top: 18%; left: 51%; }
+.africa { top: 34%; left: 50%; }
+
+.asia { top: 18%; left: 71%; }
+.oceania { top: 51%; left: 86%; }
+
+
+.buttons-layer{
+  position: absolute;
+  inset: 0;
+  transform: translateY(29%); /* 👈 aumenta/diminuisci */
+  pointer-events: none;
+}
+.buttons-layer .continent{
+  pointer-events: auto;
+}
+

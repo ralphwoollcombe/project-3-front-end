@@ -5,8 +5,20 @@ export const AuthContext = createContext({
   setUser: () => {},
 })
 
+const getUserFromToken = () => {
+  const token = localStorage.getItem('token')
+  if (!token) return null
+
+  try {
+    return JSON.parse(atob(token.split('.')[1])).payload
+  } catch {
+    localStorage.removeItem('token')
+    return null
+  }
+}
+
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(getUserFromToken())
 
   const value = { user, setUser }
 

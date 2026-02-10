@@ -5,10 +5,15 @@ import Home from './components/Home'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import SignOut from './components/SignOut'
+
+import Countries from './components/Countries/Countries'
+
 import QuestList from './components/QuestList'
 import QuestForm from './components/QuestForm'
+
 import * as questService from './services/questService';
 import { AuthContext } from './contexts/AuthContext';
+
 
 const App = () => {
   const {user} = useContext(AuthContext);
@@ -41,7 +46,10 @@ useEffect(() => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-out" element={<SignOut />} />
-        <Route path="/users/userId/quests" element={<QuestList quests={quests} />} />
+
+        <Route path="/countries" element={<Countries />} />
+
+        <Route path="/users/:userId/quests" element={<QuestList quests={quests} />} />
         <Route path="/quests/new" element={<QuestForm addQuest={addQuest} />} />
       </Routes>
     </>

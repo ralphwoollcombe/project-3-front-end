@@ -7,6 +7,7 @@ const SignOut = () => {
   const { setUser } = useContext(AuthContext)
 
   useEffect(() => {
+    localStorage.removeItem('token')
     setUser(null)
     navigate('/')
   }, [setUser, navigate])
