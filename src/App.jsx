@@ -15,17 +15,20 @@ import QuestList from './components/QuestList'
 import QuestForm from './components/QuestForm'
 
 import * as questService from './services/questService';
+import * as cuntryService from './services/cuntryService';
 import { AuthContext } from './contexts/AuthContext';
 
 
 const App = () => {
   const { user } = useContext(AuthContext);
   const [quests, setQuests] = useState([]);
+  const countries = fetch
   const navigate = useNavigate();
 
   const addQuest = async (questFormData) => {
-    const newQuest = await questService.create(questFormData)
+    const newQuest = await questService.create(questFormData, user._id)
     setQuests([...quests, newQuest])
+    console.log('these are all the quests', quests)
     navigate(`/users/${user._id}/quests`)
   }
 
@@ -55,8 +58,8 @@ const App = () => {
         <Route path="/countries" element={user ? <Countries /> : <Navigate to="/" replace />} />
         <Route path="/countries/:continent" element={user ? <Continent /> : <Navigate to="/" replace />} />
 
-        <Route path="/users/:userId/quests" element={user ? <QuestList quests={quests} /> : <Navigate to="/" replace />} />
-        <Route path="/quests/new" element={user ? <QuestForm addQuest={addQuest} /> : <Navigate to="/" replace />} />
+        <Route path="/users/:userId/quests" element={<QuestList quests={quests} />} />
+        <Route path="/quests/new" element={<QuestForm addQuest={addQuest} />} />
       </Routes>
     </>
   )

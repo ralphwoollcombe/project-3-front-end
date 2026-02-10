@@ -8,12 +8,13 @@ const index = async (userId) => {
         });
         const jsonRes = await res.json();
         console.log(jsonRes)
+        return jsonRes
     } catch (error) {
         console.log(error)
     }
 }
 
-const create = async (questFormData) => {
+const create = async (questFormData, userId) => {
     try {
         const res = await fetch(`${BASE_URL}/users/${userId}/quests`, {
             method: 'POST',
@@ -27,4 +28,4 @@ const create = async (questFormData) => {
     }
 }
 
-export {index}
+export {index, create}
