@@ -21,6 +21,7 @@ const App = () => {
   const { user } = useContext(AuthContext);
   const [quests, setQuests] = useState([]);
   const navigate = useNavigate();
+  
 
   const addQuest = async (questFormData) => {
     const newQuest = await questService.create(questFormData, user._id)
@@ -39,6 +40,25 @@ const App = () => {
       fetchQuests()
     }
   }, [user])
+  
+useEffect(() => {
+  const fetchQuests = async () => {
+    const questData = await questService.index(user._id);
+    setQuests(questData)
+    console.log(quests)
+  }
+  if (user) {
+    fetchQuests()
+  }
+}, [user])
+
+useEffect(() => {
+  const fetchCountries = async () => {
+    const countryData = await cuntryService.index();
+    setCountries(countryData)
+  }
+  fetchCountries()
+}, [])
 
   return (
     <>
