@@ -7,22 +7,56 @@ const QuestDetails = () => {
     const [quest, setQuest] = useState(null);
     const {questId} = useParams();
     const {user} = useContext(AuthContext);
-    const mainSections = Object.entries(quest).filter()
 
     useEffect(() => {
         const fetchQuest = async () => {
-            const questData = await questService.show(user._id, questId)
-            setQuest(questData)
+            try {
+                const questData = await questService.show(user._id, questId)
+                console.log('my quest data', questData)
+                setQuest(questData)
+            } catch (error) {
+                console.log(error)
+            } 
         }
         fetchQuest();
-    })
+        
+    }, [questId])
+
+    if (!quest) return <p>Loading...</p>
+
+    const mainSections = Object.entries(quest).filter(
+        ([key, value]) => 
+            value &&
+            typeof value === 'object' && 
+            "story" in value
+    )
+
     return (
         <main>
-            <title>My quest through {quest.country.name}</title>
+            <h1>My quest through {quest.country?.name}</h1>
+
             <section>
-                
+                <h2>General:</h2>
+                <p>{quest.general}</p>
             </section>
-            {quest}
+
+            {mainSections.map(([name, data]) => (
+            <section>
+                <h2>{name}</h2>
+                <div>
+                    <h3>Review:</h3>
+                    <p>{data.review}</p>
+                </div>
+                <div>
+                    <h3>Rating:</h3>
+                    <p>{data.rating}</p>
+                </div>
+                <div>
+                    <h3>Story:</h3>
+                    <p>{data.story}</p>
+                </div>
+            </section>
+            ))}
         </main>
     )
 }
