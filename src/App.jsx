@@ -70,7 +70,7 @@ useEffect(() => {
 
         <Route path="/users/:userId/quests" element={<QuestList quests={quests} />} />
         <Route path="/users/:userId/quests/:questId" element={<QuestDetails />} />
-        <Route path="/quests/new" element={<QuestForm addQuest={addQuest} />} />
+        <Route path="/quests/new" element={<QuestForm addQuest={addQuest} countries={countries} />} />
       </Routes>
     </>
   )
