@@ -85,7 +85,7 @@ const Continent = () => {
 
       <div className="countries-grid">
         {countries.map((c) => (
-          <div key={c._id || c.cca3} className="country-card">
+          <div key={c._id} className="country-card">
             {c.flagUrl && (
               <img
                 src={c.flagUrl}
