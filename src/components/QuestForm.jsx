@@ -230,7 +230,7 @@ const [formData, setFormData] = useState({
             <legend htmlFor="country">Country</legend>
                 <select id="country" name="country" value={formData.country} onChange={handleChange} required>
                 <option value="">Select a country</option>
-                {props.countries.map(country => (
+                {props.countries?.map(country => (
                     <option key={country._id} name={country._id} value={country._id}>{country.name}</option>
                 ))}
                 </select>

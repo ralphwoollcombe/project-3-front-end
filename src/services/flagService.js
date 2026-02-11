@@ -14,3 +14,4 @@ const getByCode = async (code) => {
 };
 
 export { getByRegion, getByCode };
+
