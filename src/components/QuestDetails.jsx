@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/AuthContext";
 const QuestDetails = () => {
     const [quest, setQuest] = useState(null);
     const {questId} = useParams();
-    const {user} = useContext(UserContext);
+    const {user} = useContext(AuthContext);
     const mainSections = Object.entries(quest).filter()
 
     useEffect(() => {
