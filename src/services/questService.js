@@ -48,4 +48,33 @@ const show = async (userId, questId) => {
         console.log(error)
     }
 }
-export { index, create, show }
+
+const deleteQuest = async (userId, questId) => {
+    try {
+    const res = await fetch(`${BASE_URL}/users/${userId}/quests/${questId}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},
+        });
+        const jsonRes = await res.json()
+        return jsonRes
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const updateQuest = async (userId, questId, questFormData) => {
+ try {
+    const res = await fetch(`${BASE_URL}/users/${userId}/quests/${questId}`, {
+            method: 'PUT',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',},
+            body: JSON.stringify(questFormData)
+        });
+        const jsonRes = await res.json()
+        return jsonRes
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export {index, create, show, deleteQuest, updateQuest}
