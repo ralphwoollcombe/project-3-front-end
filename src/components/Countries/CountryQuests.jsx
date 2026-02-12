@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import * as questService from '../../services/questService'
 
 const CountryQuests = () => {
@@ -38,10 +38,13 @@ const CountryQuests = () => {
         <p>No quests yet for this country.</p>
       ) : (
         quests.map((q) => (
-          <div key={q._id} >
-            <h3>{q.general}</h3>
-            <p>By: {q.author?.username}</p>
+          <div key={q._id}>
+            <Link to={`/quests/${q._id}`} >
+              <h3>{q.general}</h3>
+          </Link>
+              <p>By: {q.author?.username}</p>
           </div>
+
         ))
       )}
     </main>

@@ -38,7 +38,9 @@ const CountryDetails = () => {
                 <ul>
                     {country.quests.map((quest) => (
                         <li key={quest._id}>
-                            <strong>{quest.general}</strong>
+                            <Link ti={'/quests/${quest._id}'}>
+                                <strong>{quest.general}</strong>
+                            </Link>
                         </li>                        
                     ))}
                 </ul>
