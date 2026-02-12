@@ -49,11 +49,20 @@ const show = async (userId, questId) => {
     }
 }
 
+export const showQuest = async (questId) => {
+    const res = await fetch(`${BASE_URL}/quests/${questId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    })
+    if (!res.ok) throw new Error('Failed to fetch quest')
+    return res.json()
+}
+
+
 const deleteQuest = async (userId, questId) => {
     try {
-    const res = await fetch(`${BASE_URL}/users/${userId}/quests/${questId}`, {
+        const res = await fetch(`${BASE_URL}/users/${userId}/quests/${questId}`, {
             method: 'DELETE',
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         const jsonRes = await res.json()
         return jsonRes
@@ -63,11 +72,13 @@ const deleteQuest = async (userId, questId) => {
 }
 
 const updateQuest = async (userId, questId, questFormData) => {
- try {
-    const res = await fetch(`${BASE_URL}/users/${userId}/quests/${questId}`, {
+    try {
+        const res = await fetch(`${BASE_URL}/users/${userId}/quests/${questId}`, {
             method: 'PUT',
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json',},
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(questFormData)
         });
         const jsonRes = await res.json()
@@ -77,4 +88,4 @@ const updateQuest = async (userId, questId, questFormData) => {
     }
 }
 
-export {index, create, show, deleteQuest, updateQuest}
+export { index, create, show, deleteQuest, updateQuest }
