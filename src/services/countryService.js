@@ -17,16 +17,11 @@ const show = async (countryId) => {
         const res = await fetch(`${BASE_URL}/countries/${countryId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},
         });
-        const jsonRes = await res.json();
-        return jsonRes 
+        if (!res.ok) throw new Error('Failed to fetch country')
+        return res.json()
     } catch (error) {
         console.log(error)
     }
-    const res = await fetch (`${BASE_URL}/countries/${countryId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},
-    })
-    if (!res.ok) throw new Error('Failed to fetch country')
-        return res.json()
 }
 
 export {
