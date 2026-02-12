@@ -90,8 +90,9 @@ const QuestForm = (props) => {
         <h1>{questId ? 'Edit Quest' : 'New Quest'}</h1>
     <form onSubmit={handleSubmit} className={styles.form}>
         <fieldset>
-            <label htmlFor="general">General</label>
+            <legend htmlFor="general">General</legend>
           <textarea
+            className={styles.general}
             id="general"
             type="text"
             name="general"
@@ -99,22 +100,23 @@ const QuestForm = (props) => {
             onChange={handleChange}
           />
        </fieldset>
+       
         <fieldset>
             <legend>Food</legend>
                 <div className={styles.reviewRow}>
                     <div>
-                        <label htmlFor="food.review">Review</label>
+                        <label htmlFor="food.review">Review: </label>
                         <input id="food.review" name="food.review" value={formData.food.review} onChange={handleChange} />
                     </div>
 
                     <div>
-                        <label htmlFor="food.rating">Rating</label>
+                        <label htmlFor="food.rating">Rating: </label>
                         <select id="food.rating" name="food.rating" value={formData.food.rating} onChange={handleChange}>
                         {ratingNumbers.map(n => <option key={n} value={n}>{n}</option>)}
                         </select>
                     </div>
                     </div>
-            <label htmlFor="food.story">Story:</label>
+            <label htmlFor="food.story">Story: </label>
             <textarea
                 id="food.story"
                 name="food.story"
@@ -128,7 +130,7 @@ const QuestForm = (props) => {
             <legend>Experience</legend>
             <div className={styles.reviewRow}>
                 <div>
-                <label htmlFor="experience.review">Review</label>
+                <label htmlFor="experience.review">Review: </label>
                 <input
                     id="experience.review"
                     name="experience.review"
@@ -137,7 +139,7 @@ const QuestForm = (props) => {
                 />
                 </div>
                 <div>
-                <label htmlFor="experience.rating">Rating</label>
+                <label htmlFor="experience.rating">Rating: </label>
                 <select
                     id="experience.rating"
                     name="experience.rating"
@@ -150,7 +152,7 @@ const QuestForm = (props) => {
                 </select>
                 </div>
             </div>
-            <label htmlFor="experience.story">Story</label>
+            <label htmlFor="experience.story">Story: </label>
             <textarea
                 id="experience.story"
                 name="experience.story"
@@ -164,7 +166,7 @@ const QuestForm = (props) => {
             <legend>Transport</legend>
             <div className={styles.reviewRow}>
                 <div>
-                <label htmlFor="transport.review">Review</label>
+                <label htmlFor="transport.review">Review: </label>
                 <input
                     id="transport.review"
                     name="transport.review"
@@ -174,7 +176,7 @@ const QuestForm = (props) => {
                 </div>
 
                 <div>
-                <label htmlFor="transport.rating">Rating</label>
+                <label htmlFor="transport.rating">Rating: </label>
                 <select
                     id="transport.rating"
                     name="transport.rating"
@@ -187,7 +189,7 @@ const QuestForm = (props) => {
                 </select>
                 </div>
             </div>
-            <label htmlFor="transport.story">Story</label>
+            <label htmlFor="transport.story">Story: </label>
             <textarea
                 id="transport.story"
                 name="transport.story"
@@ -202,7 +204,7 @@ const QuestForm = (props) => {
 
             <div className={styles.reviewRow}>
                 <div>
-                <label htmlFor="nature.review">Review</label>
+                <label htmlFor="nature.review">Review: </label>
                 <input
                     id="nature.review"
                     name="nature.review"
@@ -212,7 +214,7 @@ const QuestForm = (props) => {
                 </div>
 
                 <div>
-                <label htmlFor="nature.rating">Rating</label>
+                <label htmlFor="nature.rating">Rating: </label>
                 <select
                     id="nature.rating"
                     name="nature.rating"
@@ -226,7 +228,7 @@ const QuestForm = (props) => {
                 </div>
             </div>
 
-            <label htmlFor="nature.story">Story</label>
+            <label htmlFor="nature.story">Story: </label>
             <textarea
                 id="nature.story"
                 name="nature.story"
@@ -241,7 +243,7 @@ const QuestForm = (props) => {
 
             <div className={styles.reviewRow}>
                 <div>
-                <label htmlFor="music.review">Review</label>
+                <label htmlFor="music.review">Review: </label>
                 <input
                     id="music.review"
                     name="music.review"
@@ -251,7 +253,7 @@ const QuestForm = (props) => {
                 </div>
 
                 <div>
-                <label htmlFor="music.rating">Rating</label>
+                <label htmlFor="music.rating">Rating: </label>
                 <select
                     id="music.rating"
                     name="music.rating"
@@ -265,7 +267,7 @@ const QuestForm = (props) => {
                 </div>
             </div>
 
-            <label htmlFor="music.story">Story</label>
+            <label htmlFor="music.story">Story: </label>
             <textarea
                 id="music.story"
                 name="music.story"
@@ -291,7 +293,7 @@ const QuestForm = (props) => {
 
         <fieldset className={styles.countryWrapper}>
             <legend htmlFor="country">Country</legend>
-                <select id="country" name="country" value={formData.country} onChange={handleChange} required>
+                <select className={styles.country} id="country" name="country" value={formData.country} onChange={handleChange} required>
                 <option value="">Select a country</option>
                 {props.countries?.map(country => (
                     <option key={country._id} name={country._id} value={country._id}>{country.name}</option>
@@ -299,7 +301,7 @@ const QuestForm = (props) => {
                 </select>
       </fieldset>
 
-      <button type="submit">Submit Quest</button>
+      <button className={styles.submit} type="submit">Submit Quest</button>
     </form>
     </main>
   );
