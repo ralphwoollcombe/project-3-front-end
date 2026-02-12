@@ -1,0 +1,53 @@
+.page {
+  padding-top: 90px;
+  width: 100%;
+  box-sizing: border-box;
+
+  display: block;
+}
+
+
+.title {
+  margin: 0;                
+  padding: 24px 0 18px;      
+  text-align: center;
+  line-height: 1;
+}
+
+
+.map {
+  width: min(1000px, 92vw);
+  height: 560px;
+
+  margin: 0 auto;           
+  position: relative;
+
+  background-image: url("../assets/world.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+
+.zone {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3px;
+}
+
+.tag {
+  color: #6b7a92;
+  font-size: 19px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.europe { top: 140px; left: 450px; width: 220px; }
+.asia { top: 150px; left: 720px; width: 240px; }
+.africa { top: 300px; left: 520px; width: 220px; }
+.northAmerica { top: 150px; left: 140px; width: 220px; }
+.southAmerica { top: 350px; left: 240px; width: 220px; }
+.oceania { top: 360px; left: 820px; width: 200px; }
