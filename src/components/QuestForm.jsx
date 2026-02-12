@@ -101,22 +101,19 @@ const QuestForm = (props) => {
        </fieldset>
         <fieldset>
             <legend>Food</legend>
-                <label htmlFor="food.review"> Review:</label>
-                    <input
-                        id="food.review"
-                        name="food.review"
-                        value={formData.food.review}
-                        onChange={handleChange}
-                    />
-                <label htmlFor="food.rating"> Rating:</label>
-                    <select
-                    id="food.rating"
-                    name="food.rating"
-                    value={formData.food.rating}
-                    onChange={handleChange}
-            >
-                {ratingNumbers.map(number => <option key={number} name={number} value={number}>{number}</option>)}
-            </select>
+                <div className={styles.reviewRow}>
+                    <div>
+                        <label htmlFor="food.review">Review</label>
+                        <input id="food.review" name="food.review" value={formData.food.review} onChange={handleChange} />
+                    </div>
+
+                    <div>
+                        <label htmlFor="food.rating">Rating</label>
+                        <select id="food.rating" name="food.rating" value={formData.food.rating} onChange={handleChange}>
+                        {ratingNumbers.map(n => <option key={n} value={n}>{n}</option>)}
+                        </select>
+                    </div>
+                    </div>
             <label htmlFor="food.story">Story:</label>
             <textarea
                 id="food.story"
@@ -129,116 +126,154 @@ const QuestForm = (props) => {
 
         <fieldset>
             <legend>Experience</legend>
-                <label htmlFor="experience.review">Review:</label>
+            <div className={styles.reviewRow}>
+                <div>
+                <label htmlFor="experience.review">Review</label>
                 <input
                     id="experience.review"
                     name="experience.review"
                     value={formData.experience.review}
-                     onChange={handleChange}
+                    onChange={handleChange}
                 />
-                <label htmlFor="experience.rating">Rating:</label>
+                </div>
+                <div>
+                <label htmlFor="experience.rating">Rating</label>
                 <select
                     id="experience.rating"
                     name="experience.rating"
                     value={formData.experience.rating}
                     onChange={handleChange}
                 >
-                {ratingNumbers.map(number => <option key={number} name={number} value={number}>{number}</option>)}
+                    {ratingNumbers.map(num => (
+                    <option key={num} value={num}>{num}</option>
+                    ))}
                 </select>
-                <label htmlFor="experience.story">Story:</label>
-                <textarea
-                    id="experience.story"
-                    name="experience.story"
-                    value={formData.experience.story}
-                    onChange={handleChange}
-                    required
-                />
+                </div>
+            </div>
+            <label htmlFor="experience.story">Story</label>
+            <textarea
+                id="experience.story"
+                name="experience.story"
+                value={formData.experience.story}
+                onChange={handleChange}
+                required
+            />
         </fieldset>
 
         <fieldset>
             <legend>Transport</legend>
-                <label htmlFor="transport.review">Review:</label>
+            <div className={styles.reviewRow}>
+                <div>
+                <label htmlFor="transport.review">Review</label>
                 <input
                     id="transport.review"
                     name="transport.review"
                     value={formData.transport.review}
                     onChange={handleChange}
                 />
-                <label htmlFor="transport.rating">Rating:</label>
+                </div>
+
+                <div>
+                <label htmlFor="transport.rating">Rating</label>
                 <select
                     id="transport.rating"
                     name="transport.rating"
                     value={formData.transport.rating}
                     onChange={handleChange}
                 >
-                    {ratingNumbers.map(number => <option key={number} name={number} value={number}>{number}</option>)}
+                    {ratingNumbers.map(num => (
+                    <option key={num} value={num}>{num}</option>
+                    ))}
                 </select>
-                <label htmlFor="transport.story">Story:</label>
-                <textarea
-                    id="transport.story"
-                    name="transport.story"
-                    value={formData.transport.story}
-                    onChange={handleChange}
-                    required
-                />
+                </div>
+            </div>
+            <label htmlFor="transport.story">Story</label>
+            <textarea
+                id="transport.story"
+                name="transport.story"
+                value={formData.transport.story}
+                onChange={handleChange}
+                required
+            />
         </fieldset>
 
         <fieldset>
             <legend>Nature</legend>
-                <label htmlFor="nature.review">Review:</label>
+
+            <div className={styles.reviewRow}>
+                <div>
+                <label htmlFor="nature.review">Review</label>
                 <input
                     id="nature.review"
                     name="nature.review"
                     value={formData.nature.review}
                     onChange={handleChange}
                 />
+                </div>
 
-                <label htmlFor="nature.rating">Rating:</label>
+                <div>
+                <label htmlFor="nature.rating">Rating</label>
                 <select
                     id="nature.rating"
                     name="nature.rating"
                     value={formData.nature.rating}
                     onChange={handleChange}
                 >
-                    {ratingNumbers.map(number => <option key={number} name={number} value={number}>{number}</option>)}
+                    {ratingNumbers.map(num => (
+                    <option key={num} value={num}>{num}</option>
+                    ))}
                 </select>
-                <label htmlFor="nature.story">Story:</label>
-                <textarea
-                    id="nature.story"
-                    name="nature.story"
-                    value={formData.nature.story}
-                    onChange={handleChange}
-                    required
-                />
-                </fieldset>
+                </div>
+            </div>
+
+            <label htmlFor="nature.story">Story</label>
+            <textarea
+                id="nature.story"
+                name="nature.story"
+                value={formData.nature.story}
+                onChange={handleChange}
+                required
+            />
+        </fieldset>
 
         <fieldset>
             <legend>Music</legend>
-                <label htmlFor="music.review">Review:</label>
+
+            <div className={styles.reviewRow}>
+                <div>
+                <label htmlFor="music.review">Review</label>
                 <input
                     id="music.review"
                     name="music.review"
                     value={formData.music.review}
                     onChange={handleChange}
                 />
-                <label htmlFor="music.rating">Rating:</label>
+                </div>
+
+                <div>
+                <label htmlFor="music.rating">Rating</label>
                 <select
                     id="music.rating"
                     name="music.rating"
                     value={formData.music.rating}
                     onChange={handleChange}
                 >
-                    {ratingNumbers.map(number => <option key={number} name={number} value={number}>{number}</option>)}
+                    {ratingNumbers.map(num => (
+                    <option key={num} value={num}>{num}</option>
+                    ))}
                 </select>
-                <label htmlFor="music.story">Story:</label>
-                <textarea
-                    id="music.story"
-                    name="music.story"
-                    value={formData.music.story}
-                    onChange={handleChange}
-                    required
-                />
-                </fieldset>
+                </div>
+            </div>
+
+            <label htmlFor="music.story">Story</label>
+            <textarea
+                id="music.story"
+                name="music.story"
+                value={formData.music.story}
+                onChange={handleChange}
+                required
+            />
+        </fieldset>
 
         {/* <fieldset>
             <legend>Colours (choose up to three)</legend>
@@ -254,7 +289,7 @@ const QuestForm = (props) => {
             ))}
         </fieldset> */}
 
-        <fieldset>
+        <fieldset className={styles.countryWrapper}>
             <legend htmlFor="country">Country</legend>
                 <select id="country" name="country" value={formData.country} onChange={handleChange} required>
                 <option value="">Select a country</option>
