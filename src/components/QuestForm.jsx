@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useParams } from "react-router";
+import { useState, useEffect } from "react";
+import * as questService from '../services/questService'
+import * as countryService from '../services/countryService'
+import Continent from "./Countries/Continent";
 
 const allColours = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown', 'grey', 'black', 'white'];
 const ratingNumbers = [1,2,3,4,5]
-
-const QuestForm = (props) => {
-const [formData, setFormData] = useState({
+const initialFormState = {
     general: '',
     food: {
         story: '',
@@ -32,13 +34,21 @@ const [formData, setFormData] = useState({
         rating: 1
     },
     colours: [],
-    country: ''
-  })
+    country: '',
+    continent: ''
+  }
+
+const QuestForm = (props) => {
+    const {questId, userId} = useParams()
+    const [formData, setFormData] = useState(initialFormState)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+    if (questId) {
+        props.handleUpdateQuest(questId, formData)
+    } else {
         await props.addQuest(formData);
-    }
+    }}
 
     const handleChange = (event) => {
     const {name, value} = event.target
@@ -57,10 +67,26 @@ const [formData, setFormData] = useState({
       }
     }
 
+    useEffect(() => {
+        const fetchQuest = async () => {
+            const questData = await questService.show(userId, questId)
+            console.log('my quest data', questData)
+            console.log(typeof questData.country)
+            setFormData({
+                ...questData,
+                country: questData.country?._id || ''
+        })
+        };
+        if (questId) fetchQuest();
+        return () => {setFormData(initialFormState)}
+    }, [questId])
+
     // const handleColourChange = () => {
         //}
 
    return (
+    <main>
+        <h1>{questId ? 'Edit Quest' : 'New Quest'}</h1>
     <form onSubmit={handleSubmit}>
         <label htmlFor="general">General</label>
           <textarea
@@ -238,6 +264,7 @@ const [formData, setFormData] = useState({
 
       <button type="submit">Submit Quest</button>
     </form>
+    </main>
   );
 }
 

@@ -12,6 +12,18 @@ const index = async () => {
     }
 }
 
+const show = async (countryId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/countries/${countryId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},
+        });
+        const jsonRes = await res.json();
+        return jsonRes 
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export {
-    index
+    index, show
 }
