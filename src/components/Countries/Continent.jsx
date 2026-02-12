@@ -1,19 +1,21 @@
-
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import './Continent.css'
 import * as countryService from '../../services/countryService'
 import * as flagService from '../../services/flagService'
 
 const normalizeForRestCountries = (continentParam) => {
-  if (continentParam === 'north-america' || continentParam === 'south-america') {
+  const c = (continentParam || '').toLowerCase()
+  if (c === 'north-america' || c === 'south-america' || c === 'america') {
     return 'americas'
   }
-  return continentParam
+  return c
 }
 
 const Continent = () => {
   const { continent } = useParams()
+  const navigate = useNavigate()
+
   const [countries, setCountries] = useState([])
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
@@ -25,49 +27,29 @@ const Continent = () => {
         setError('')
 
         const dbCountries = await countryService.index()
-
-        const param = continent.toLowerCase()
-
-        let filtered = dbCountries.filter((c) => {
-          const dbCont = (c.continent || c.region || '').toLowerCase()
-          return dbCont === param
-        })
-        if (
-          filtered.length === 0 &&
-          (param === 'north-america' || param === 'south-america')
-        ) {
-          filtered = dbCountries.filter((c) => {
-            const dbCont = (c.continent || c.region || '').toLowerCase()
-            return dbCont === 'americas'
-          })
-        }
-
+        const dbMap = new Map(
+          dbCountries.map((c) => [String(c.name || '').toLowerCase(), c._id])
+        )
         const restRegion = normalizeForRestCountries(continent)
         const apiCountries = await flagService.getByRegion(restRegion)
 
-        const apiMap = new Map(
-          apiCountries.map((c) => [
-            c.cca3,
-            { flag: c.flags?.png, name: c.name?.common },
-          ])
-        )
+        const merged = apiCountries
+          .map((c) => {
+            const apiName = c.name?.common || 'Unknown'
+            const dbId = dbMap.get(apiName.toLowerCase()) || null
 
-        const merged = filtered.map((c) => {
-          const code = (c.cca3 || c.code || c.alpha3Code || '').toUpperCase()
-          const extra = apiMap.get(code)
+            return {
+              cca3: c.cca3,
+              displayName: apiName,
+              flagUrl: c.flags?.png,
+              dbId,
+            }
+          })
+          .sort((a, b) => a.displayName.localeCompare(b.displayName))
 
-          return {
-            ...c,
-            cca3: code,
-            displayName: extra?.name || c.name || c.countryName || 'Unknown',
-            flagUrl: extra?.flag,
-          }
-        })
-
-        merged.sort((a, b) => a.displayName.localeCompare(b.displayName))
         setCountries(merged)
       } catch (err) {
-        setError(err.message)
+        setError(err.message || 'Something went wrong')
       } finally {
         setLoading(false)
       }
@@ -85,7 +67,15 @@ const Continent = () => {
 
       <div className="countries-grid">
         {countries.map((c) => (
-          <div key={c._id} className="country-card">
+          <div
+            key={c.dbId || c.cca3}
+            className="country-card"
+            onClick={() => c.dbId && navigate(`/countries/${continent}/${c.dbId}`)}
+            style={{
+              cursor: c.dbId ? 'pointer' : 'not-allowed',
+              opacity: c.dbId ? 1 : 0.4,
+            }}
+          >
             {c.flagUrl && (
               <img
                 src={c.flagUrl}
@@ -102,4 +92,3 @@ const Continent = () => {
 }
 
 export default Continent
-
