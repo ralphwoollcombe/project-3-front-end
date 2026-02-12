@@ -86,8 +86,9 @@ const QuestForm = (props) => {
         //}
 
    return (
-    <main className={styles.container}>
+    <main>
         <h1>{questId ? 'Edit Quest' : 'New Quest'}</h1>
+    <div  className={styles.container}>
     <form onSubmit={handleSubmit} className={styles.form}>
         <fieldset>
             <legend htmlFor="general">General</legend>
@@ -115,7 +116,7 @@ const QuestForm = (props) => {
                         {ratingNumbers.map(n => <option key={n} value={n}>{n}</option>)}
                         </select>
                     </div>
-                    </div>
+                </div>
             <label htmlFor="food.story">Story: </label>
             <textarea
                 id="food.story"
@@ -303,6 +304,7 @@ const QuestForm = (props) => {
 
       <button className={styles.submit} type="submit">Submit Quest</button>
     </form>
+    </div>
     </main>
   );
 }

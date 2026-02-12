@@ -2,12 +2,18 @@ import { useParams, Link } from "react-router-dom";
 import * as questService from '../services/questService.js'
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import styles from './QuestDetails.module.css'
 
 const QuestDetails = (props) => {
     const [quest, setQuest] = useState(null);
     const [error, setError] = useState('');
+    const [openSection, setOpenSection] = useState(null);
     const { questId, userId } = useParams();
     const { user } = useContext(AuthContext);
+
+    const toggleSection = (name) => {
+        setOpenSection(openSection === name ? null : name);
+    };
 
     useEffect(() => {
         const fetchQuest = async () => {
@@ -20,7 +26,7 @@ const QuestDetails = (props) => {
                 setQuest(questData)
             } catch (error) {
                 console.log(error)
-                setError(error.message || 'Somethingg went wrong')
+                setError(error.message || 'Something went wrong')
             }
         }
         fetchQuest()
@@ -41,34 +47,62 @@ const QuestDetails = (props) => {
     };
 
     return (
-        <main>
-            <h1>My quest through {quest.country?.name}</h1>
+        <main className={styles.container}>
+            <div className={styles.contentWrapper}>
+                
+                <div className={styles.header}>
+                    <section className={styles.headerTitle}>
+                        <h1>My quest through {quest.country?.name}</h1>
+                    </section>
+                    <section className={styles.generalCard}>
+                        <div>
+                            <h2>General</h2>
+                            <p>{quest.general}</p>
+                        </div>
+                    </section>
+                </div>
+            
+                <div className={styles.grid}>
+                    {mainSections.map(([name, data]) => {
+                        const isOpen = openSection === name;
+                        return (
+                            <section 
+                                key={name} 
+                                className={`${styles.card} ${styles[name]} ${isOpen ? styles.cardOpen : ''}`}
+                            >
+                                <h2>{name}</h2>
+                                
+                                <div className={styles.reviewRow}>
+                                    <strong>Review:</strong>
+                                    <p>{data.review}</p>
+                                    <span>{renderStars(data.rating)}</span>
+                                </div>
 
-            <section key={quest.general}>
-                <h2>General:</h2>
-                <p>{quest.general}</p>
-            </section>
-
-            {mainSections.map(([name, data]) => (
-                <section key={name}>
-                    <h2>{name}</h2>
-                    <div>
-                        <h3>Review:</h3>
-                        <p>{data.review}</p>
-                        <p>{renderStars(data.rating)}</p>
+                                <div className={styles.storyBlock}>
+                                    <div 
+                                        className={styles.storyToggle}
+                                        onClick={()=> toggleSection(name)}
+                                    >
+                                        {isOpen ? 'Close Story ▲' : 'Read Story ▼'}
+                                    </div>
+                                    
+                                    {isOpen && (
+                                        <div className={styles.storyContent}>
+                                            <p>{data.story}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </section>
+                        )
+                    })}
+                </div>
+                {quest.author?._id === user._id &&
+                    <div className={styles.actionButtons}>
+                        <Link className={styles.editBtn} to={`/users/${userId}/quests/${quest._id}/edit`}>Edit Quest</Link>
+                        <button className={styles.deleteBtn} onClick={() => props.handleDeleteQuest(questId)}>Delete Quest</button>
                     </div>
-                    <div>
-                        <h3>Story:</h3>
-                        <p>{data.story}</p>
-                    </div>
-                </section>
-            ))}
-            {userId === user._id &&
-                <>
-                    <Link to={`/users/${userId}/quests/${quest._id}/edit`}>Edit</Link>
-                    <button onClick={() => props.handleDeleteQuest(questId)}>Delete</button>
-                </>
-            }
+                }
+            </div>
         </main>
     )
 }
