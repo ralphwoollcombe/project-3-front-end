@@ -1,38 +1,48 @@
-/* Your existing styles stay the same */
-
+.container {
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .form {
+  background: #ffffff;
+  padding: 40px;
+  max-width: 1100px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  width: 100%;
-  max-width: 900px;
+  gap: 32px;
 }
 
-/* Make the title always centered */
 .container h1 {
+  grid-column: 1 / -1;
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
-/* Make fieldsets full width but distribute them into grid slots */
 .form fieldset {
-  border: 1px solid var(--border);
-  padding: 12px;
-  border-radius: 8px;
-  background: white;
-  width: 100%;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* Black section titles */
-.form fieldset legend {
+.form legend {
   background: black;
   color: white;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  letter-spacing: .5px;
 }
 
-/* COUNTRY DROPDOWN full width and centered */
 .form #country {
   grid-column: 1 / 3;
   width: 60%;
@@ -42,4 +52,35 @@
 
 .form button[type="submit"] {
   grid-column: 1 / 3;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  background: var(--primary);
+  border-radius: 8px;
+  border: none;
+  color: white;
+}
+
+.reviewRow {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.reviewRow input,
+.reviewRow select {
+  flex: 1;
+}
+
+.countryWrapper {
+  grid-column: 1 / 3;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.countryWrapper select {
+  width: 40%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
