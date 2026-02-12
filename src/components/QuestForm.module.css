@@ -1,0 +1,45 @@
+/* Your existing styles stay the same */
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Make the title always centered */
+.container h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Make fieldsets full width but distribute them into grid slots */
+.form fieldset {
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 8px;
+  background: white;
+  width: 100%;
+}
+
+/* Black section titles */
+.form fieldset legend {
+  background: black;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* COUNTRY DROPDOWN full width and centered */
+.form #country {
+  grid-column: 1 / 3;
+  width: 60%;
+  margin: 0 auto;
+  display: block;
+}
+
+.form button[type="submit"] {
+  grid-column: 1 / 3;
+}

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import * as questService from '../services/questService'
 import * as countryService from '../services/countryService'
 import Continent from "./Countries/Continent";
+import styles from './QuestForm.module.css'
 
 const allColours = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown', 'grey', 'black', 'white'];
 const ratingNumbers = [1,2,3,4,5]
@@ -85,10 +86,11 @@ const QuestForm = (props) => {
         //}
 
    return (
-    <main>
+    <main className={styles.container}>
         <h1>{questId ? 'Edit Quest' : 'New Quest'}</h1>
-    <form onSubmit={handleSubmit}>
-        <label htmlFor="general">General</label>
+    <form onSubmit={handleSubmit} className={styles.form}>
+        <fieldset>
+            <label htmlFor="general">General</label>
           <textarea
             id="general"
             type="text"
@@ -96,7 +98,7 @@ const QuestForm = (props) => {
             value={formData.general}
             onChange={handleChange}
           />
-       
+       </fieldset>
         <fieldset>
             <legend>Food</legend>
                 <label htmlFor="food.review"> Review:</label>
