@@ -23,13 +23,20 @@ a:hover {
 }
 
 body {
-  padding-top: 70px;
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #ffffff;
+  overflow: hidden;
+    --primary: #ffbda8;
+  --secondary: #dcffbc;
+  --tertiary: #bcdaff;
+  --background: #f2f4f8;
+  --border: rgba(255, 255, 255, 0.948);
 }
+
 
 h1 {
   font-size: 3.2em;
