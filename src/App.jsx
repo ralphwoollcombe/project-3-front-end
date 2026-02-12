@@ -33,6 +33,18 @@ const App = () => {
     console.log('these are all the quests', quests)
     navigate(`/users/${user._id}/quests`)
   }
+  
+  const handleDeleteQuest = async(questId) => {
+    const deleteQuest = await questService.deleteQuest(user._id, questId);
+    setQuests(quests.filter((quest) => quest._id !== questId));
+    navigate(`/users/${user._id}/quests`)
+  }
+
+  const handleUpdateQuest = async(questId, questFormData) => {
+    const updatedQuest = await questService.updateQuest(user._id, questId, questFormData);
+    setQuests(quests.map((quest) => (questId === quest._id ? updatedQuest : quest)))
+    navigate(`/users/${user._id}/quests/${questId}`)
+  }
 
   useEffect(() => {
     const fetchQuests = async () => {
@@ -70,8 +82,9 @@ const App = () => {
         <Route path="/countries/:continent" element={user ? <Continent /> : <Navigate to="/" replace />} />
 
         <Route path="/users/:userId/quests" element={<QuestList quests={quests} />} />
-        <Route path="/users/:userId/quests/:questId" element={<QuestDetails />} />
+        <Route path="/users/:userId/quests/:questId" element={<QuestDetails handleDeleteQuest={handleDeleteQuest} />} />
         <Route path="/quests/new" element={<QuestForm addQuest={addQuest} countries={countries} />} />
+        <Route path="/users/:userId/quests/:questId/edit" element={<QuestForm  handleUpdateQuest={handleUpdateQuest} countries={countries}/>} />
       </Routes>
     </>
   )
