@@ -45,6 +45,7 @@ const QuestForm = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+    console.log("FORM DATA SENT:", formData);
     if (questId) {
         props.handleUpdateQuest(questId, formData)
     } else {
