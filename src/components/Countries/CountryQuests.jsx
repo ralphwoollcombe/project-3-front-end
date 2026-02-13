@@ -39,7 +39,7 @@ const CountryQuests = () => {
       ) : (
         quests.map((q) => (
           <div key={q._id}>
-            <Link to={`users/${q.author._id}/quests/${q._id}`} >
+            <Link to={`/users/${q.author._id}/quests/${q._id}`} >
               <h3>{q.general}</h3>
           </Link>
               <p>By: {q.author?.username}</p>
