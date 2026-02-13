@@ -28,14 +28,13 @@ const create = async (questFormData, userId) => {
     }
 }
 
-export async function getByCountry(userId, countryId) {
-    const res = await fetch(`${BASE_URL}/${userId}/quests?country=${countryId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    })
-    if (!res.ok) throw new Error('Failed to fetch quests by country')
-    return res.json()
+export async function getByCountry(countryId) {
+  const res = await fetch(`${BASE_URL}/countries/${countryId}`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  })
+  if (!res.ok) throw new Error('Failed to fetch quests by country')
+  return await res.json()
 }
-
 
 
 const show = async (userId, questId) => {

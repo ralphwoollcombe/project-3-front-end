@@ -1,50 +1,50 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import * as questService from '../../services/questService'
+import * as countryService from '../../services/countryService'
 
 const CountryQuests = () => {
-  const { countryId } = useParams()
+  const { continent, countryId } = useParams()
+  const [country, setCountry] = useState(null)
   const [quests, setQuests] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
         setLoading(true)
         setError('')
-        const data = await questService.getByCountry(countryId)
-        setQuests(data)
+
+        const countryData = await countryService.show(countryId)
+        setCountry(countryData)
+
+        setQuests(countryData.quests || [])
       } catch (err) {
-        setError(err.message)
+        setError(err.message || 'Something went wrong')
       } finally {
         setLoading(false)
       }
     }
 
-    fetchData()
+    loadData()
   }, [countryId])
 
   if (loading) return <h2>Loading...</h2>
   if (error) return <h2>{error}</h2>
 
-  const countryName = quests[0]?.country?.name || 'Country'
-
   return (
     <main>
-      <h1>{countryName}</h1>
+      <h1>{country?.name || continent.toUpperCase()}</h1>
 
       {quests.length === 0 ? (
         <p>No quests yet for this country.</p>
       ) : (
         quests.map((q) => (
           <div key={q._id}>
-            <Link to={`/users/${q.author._id}/quests/${q._id}`} >
-              <h3>{q.general}</h3>
-          </Link>
-              <p>By: {q.author?.username}</p>
+            <p><strong>{q.author?.username}</strong></p>
+            <Link to={`/users/${q.author._id}/quests/${q._id}`}>Open full quest →</Link>
           </div>
-
         ))
       )}
     </main>
