@@ -26,7 +26,7 @@ Figma Wireframes: https://www.figma.com/design/0k9OYKOj8zd38qot5IgqJz/Adventure-
 - Adventures can be viewed in a detailed show page.
 - Users can edit or delete only their own adventures.
 - Users can access "Your Adventures" from the navigation bar.
-- 
+
 
 ---
 
