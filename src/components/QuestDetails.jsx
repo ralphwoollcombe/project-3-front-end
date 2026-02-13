@@ -55,7 +55,7 @@ const QuestDetails = (props) => {
                         {userId === quest.author._id ? (
                         <h1>My quest through {quest.country?.name}</h1>
                         ):(
-                        <h1>{user.username}'s quest through {quest.country?.name}</h1>
+                        <h1>A quest through {quest.country?.name}</h1>
                         )}
                     </section>
                     <section className={styles.generalCard}>
