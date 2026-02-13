@@ -10,6 +10,12 @@
 
 ---
 
+# Planning
+- Project planning included MVP user Stories, wireframes, and database design.
+
+Trello Board: https://trello.com/b/amFrGF7R/travel-adventures-map
+Figma Wireframes: https://www.figma.com/design/0k9OYKOj8zd38qot5IgqJz/Adventure-App?node-id=0-1&p=f
+
 # How-To-Use
 - Users can sign up by creating a new account.
 - Registered users can sign in securely.
@@ -58,4 +64,17 @@
 - CSS
 
 
+---
 
+## Attributions
+1. -Project built using General Assembly course materials.
+
+
+---
+
+
+# Next-steps
+- Add image upload for adventures.
+- Implements likes and comments.
+- Add search and filtering features.
+- Show visited countries statistic.
