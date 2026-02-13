@@ -24,20 +24,24 @@ const App = () => {
   const { user } = useContext(AuthContext)
   const [quests, setQuests] = useState([])
   const [countries, setCountries] = useState([])
+  const navigate = useNavigate()
 
   const addQuest = async (questFormData) => {
     const newQuest = await questService.create(questFormData, user._id)
     setQuests([...quests, newQuest])
+    navigate('/countries')
   }
 
   const handleDeleteQuest = async (questId) => {
     await questService.deleteQuest(user._id, questId)
     setQuests(quests.filter((q) => q._id !== questId))
+    navigate('/countries')
   }
 
   const handleUpdateQuest = async (questId, questFormData) => {
     const updatedQuest = await questService.updateQuest(user._id, questId, questFormData)
     setQuests(quests.map((q) => (q._id === questId ? updatedQuest : q)))
+    navigate('/countries')
   }
 
   useEffect(() => {
