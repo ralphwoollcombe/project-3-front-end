@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import * as countryService from '../../services/countryService'
 
 const CountryDetails = () => {
@@ -38,7 +38,8 @@ const CountryDetails = () => {
                 <ul>
                     {country.quests.map((quest) => (
                         <li key={quest._id}>
-                            <Link to={`/quests/${quest._id}`}>
+                            <Link to={`/users/${quest.author._id}/quests/${quest._id}`} 
+                            replace>
                                 <strong>{quest.general}</strong>
                             </Link>
                         </li>                        
