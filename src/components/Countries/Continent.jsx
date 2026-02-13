@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import './Continent.css'
 import * as countryService from '../../services/countryService'
 import * as flagService from '../../services/flagService'
+import './Continent.css'
 
 const normalizeForRestCountries = (continentParam) => {
   const c = (continentParam || '').toLowerCase()
-  if (c === 'north-america' || c === 'south-america' || c === 'america') {
-    return 'americas'
-  }
+  if (c === 'north-america' || c === 'south-america' || c === 'america') return 'americas'
   return c
 }
 
@@ -27,9 +25,8 @@ const Continent = () => {
         setError('')
 
         const dbCountries = await countryService.index()
-        const dbMap = new Map(
-          dbCountries.map((c) => [String(c.name || '').toLowerCase(), c._id])
-        )
+        const dbMap = new Map(dbCountries.map((c) => [c.name.toLowerCase(), c._id]))
+
         const restRegion = normalizeForRestCountries(continent)
         const apiCountries = await flagService.getByRegion(restRegion)
 
@@ -37,7 +34,6 @@ const Continent = () => {
           .map((c) => {
             const apiName = c.name?.common || 'Unknown'
             const dbId = dbMap.get(apiName.toLowerCase()) || null
-
             return {
               cca3: c.cca3,
               displayName: apiName,
@@ -49,7 +45,7 @@ const Continent = () => {
 
         setCountries(merged)
       } catch (err) {
-        setError(err.message || 'Something went wrong')
+        setError(err.message || 'Failed to fetch countries/flags')
       } finally {
         setLoading(false)
       }
@@ -76,13 +72,7 @@ const Continent = () => {
               opacity: c.dbId ? 1 : 0.4,
             }}
           >
-            {c.flagUrl && (
-              <img
-                src={c.flagUrl}
-                alt={`${c.displayName} flag`}
-                className="country-flag"
-              />
-            )}
+            {c.flagUrl && <img src={c.flagUrl} alt={`${c.displayName} flag`} className="country-flag" />}
             <div className="country-name">{c.displayName}</div>
           </div>
         ))}
