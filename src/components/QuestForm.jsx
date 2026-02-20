@@ -1,8 +1,6 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import * as questService from '../services/questService'
-import * as countryService from '../services/countryService'
-import Continent from "./Countries/Continent";
 import styles from './QuestForm.module.css'
 
 const allColours = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown', 'grey', 'black', 'white'];
@@ -45,7 +43,6 @@ const QuestForm = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    console.log("FORM DATA SENT:", formData);
     if (questId) {
         props.handleUpdateQuest(questId, formData)
     } else {
@@ -72,19 +69,25 @@ const QuestForm = (props) => {
     useEffect(() => {
         const fetchQuest = async () => {
             const questData = await questService.show(userId, questId)
-            console.log('my quest data', questData)
-            console.log(typeof questData.country)
             setFormData({
                 ...questData,
                 country: questData.country?._id || ''
         })
         };
         if (questId) fetchQuest();
-        return () => {setFormData(initialFormState)}
     }, [questId])
 
-    // const handleColourChange = () => {
-        //}
+    const handleColourChange = (colour) => {
+        setFormData((prev) => {
+            const has = prev.colours.includes(colour)
+            const next = has
+                ? prev.colours.filter((c) => c !== colour)
+                : prev.colours.length < 3
+                    ? [...prev.colours, colour]
+                    : prev.colours
+            return { ...prev, colours: next }
+        })
+    }
 
    return (
     <main>
@@ -279,19 +282,23 @@ const QuestForm = (props) => {
             />
         </fieldset>
 
-        {/* <fieldset>
+        <fieldset className={styles.coloursFieldset}>
             <legend>Colours (choose up to three)</legend>
+            <div className={styles.coloursGrid}>
             {allColours.map(colour => (
-                <label key={colour}>
+                <label key={colour} className={`${styles.colourLabel} ${formData.colours.includes(colour) ? styles.colourSelected : ''}`}>
                     <input
                     type="checkbox"
                     checked={formData.colours.includes(colour)}
                     onChange={() => handleColourChange(colour)}
+                    className={styles.colourCheckbox}
                     />
-                    {colour}
+                    <span className={styles.colourSwatch} style={{ backgroundColor: colour }} />
+                    <span className={styles.colourName}>{colour}</span>
                 </label>
             ))}
-        </fieldset> */}
+            </div>
+        </fieldset>
 
         <fieldset className={styles.countryWrapper}>
             <legend htmlFor="country">Country</legend>

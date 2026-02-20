@@ -4,13 +4,14 @@
 
 .map-container {
     position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .world-map {
   width: 100%;
   display: block;
 }
-
 
 .continent{
   position: absolute;
@@ -20,11 +21,10 @@
   border: 0;
   padding: 6px 14px;
   border-radius: 8px;
-  font-size: .8rem;
+  font-size: clamp(0.55rem, 1.2vw, 0.8rem);
   cursor: pointer;
+  white-space: nowrap;
 }
-
-
 
 .north-america { top: 22%; left: 20%; }
 .south-america { top: 44%; left: 28%; }
@@ -34,7 +34,6 @@
 
 .asia { top: 18%; left: 71%; }
 .oceania { top: 51%; left: 86%; }
-
 
 .buttons-layer{
   position: absolute;
@@ -46,3 +45,8 @@
   pointer-events: auto;
 }
 
+@media (max-width: 480px) {
+  .continent {
+    padding: 4px 8px;
+  }
+}

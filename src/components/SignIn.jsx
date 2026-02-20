@@ -23,7 +23,7 @@ const SignIn = () => {
     try {
       const signedInUser = await signIn(formData)
       setUser(signedInUser)
-      navigate('/')
+      navigate('/countries')
     } catch (err) {
       setMessage('Invalid Credentials')
     }

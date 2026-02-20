@@ -76,7 +76,7 @@ const App = () => {
 
         <Route path="/countries/:continent/:countryId" element={user ? <CountryQuests /> : <Navigate to="/" replace />} />
 
-        <Route path="/users/:userId/quests" element={<QuestList quests={quests} />} />
+        <Route path="/users/:userId/quests" element={user ? <QuestList quests={quests} /> : <Navigate to="/" replace />} />
         <Route path="/quests/new" element={<QuestForm addQuest={addQuest} countries={countries} />} />
         <Route path="/users/:userId/quests/:questId" element={<QuestDetails handleDeleteQuest={handleDeleteQuest} />} />
         <Route path="/users/:userId/quests/:questId/edit" element={<QuestForm handleUpdateQuest={handleUpdateQuest} countries={countries} />} />

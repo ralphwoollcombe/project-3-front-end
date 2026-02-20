@@ -52,7 +52,7 @@ const QuestDetails = (props) => {
                 
                 <div className={styles.header}>
                     <section className={styles.headerTitle}>
-                        {userId === quest.author._id ? (
+                        {userId === quest.author?._id ? (
                         <h1>My quest through {quest.country?.name}</h1>
                         ):(
                         <h1>A quest through {quest.country?.name}</h1>
@@ -100,6 +100,17 @@ const QuestDetails = (props) => {
                         )
                     })}
                 </div>
+                {quest.colours?.length > 0 && (
+                    <div className={styles.coloursRow}>
+                        <strong>Colours:</strong>
+                        <div className={styles.colourDots}>
+                            {quest.colours.map((c) => (
+                                <span key={c} className={styles.colourDot} style={{ backgroundColor: c }} title={c} />
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 {quest.author?._id === user._id &&
                     <div className={styles.actionButtons}>
                         <Link className={styles.editBtn} to={`/users/${userId}/quests/${quest._id}/edit`}>Edit Quest</Link>

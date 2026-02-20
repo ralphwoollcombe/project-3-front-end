@@ -21,7 +21,7 @@
 }
 
 .landing-title {
-  font-size: 48px;
+  font-size: clamp(28px, 6vw, 48px);
   letter-spacing: 2px;
   margin: 0;
 }
