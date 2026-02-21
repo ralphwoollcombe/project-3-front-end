@@ -100,6 +100,54 @@ select:focus, textarea:focus {
   flex: 1;
 }
 
+.coloursFieldset {
+  grid-column: 1 / -1;
+}
+
+.coloursGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.colourLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 2px solid #d6d6d6;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  user-select: none;
+}
+
+.colourLabel:hover {
+  border-color: rgb(255, 179, 155);
+}
+
+.colourSelected {
+  border-color: rgb(255, 179, 155);
+  background: #fff3f0;
+}
+
+.colourCheckbox {
+  display: none;
+}
+
+.colourSwatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.colourName {
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
 .countryWrapper {
   grid-column: 1 / 3;
   text-align: center;
@@ -111,4 +159,28 @@ select:focus, textarea:focus {
   padding: 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px;
+  }
+
+  .form {
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .reviewRow {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .countryWrapper select {
+    width: 100%;
+  }
+
+  .form .country {
+    width: 100%;
+  }
 }

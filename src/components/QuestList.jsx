@@ -4,7 +4,6 @@ import styles from './QuestList.module.css';
 import worldMap from '../assets/world.png'; 
 
 const QuestList = (props) => {
-  console.log("quests", props.quests);
   const { userId } = useParams();
 
   const norm = (s) =>

@@ -156,6 +156,26 @@
   margin-top: -2px;
 }
 
+.coloursRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.colourDots {
+  display: flex;
+  gap: 8px;
+}
+
+.colourDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+}
+
 .actionButtons {
   display: flex;
   gap: 20px;
@@ -195,5 +215,24 @@
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .editBtn, .deleteBtn {
+    text-align: center;
   }
 }
