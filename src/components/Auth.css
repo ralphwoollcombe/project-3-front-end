@@ -1,0 +1,93 @@
+/* reset base importantissimo */
+* {
+  box-sizing: border-box;
+}
+
+/* pagina centrata */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* card del form */
+.auth-card {
+  background: #1f1f1f;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* titolo */
+.auth-card h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* messaggi errore */
+.auth-message {
+  color: #ff6b6b;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* gruppo label + input */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* label */
+.form-group label {
+  font-size: 14px;
+}
+
+/* input */
+.form-group input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+/* bottoni */
+.auth-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.auth-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* bottone principale */
+.auth-buttons button[type="submit"] {
+  background: #4caf50;
+  color: white;
+}
+
+/* bottone cancel */
+.auth-buttons button[type="button"] {
+  background: #333;
+  color: white;
+}

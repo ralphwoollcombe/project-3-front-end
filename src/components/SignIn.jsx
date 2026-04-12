@@ -2,6 +2,7 @@ import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signIn } from '../services/authService'
 import { AuthContext } from '../contexts/AuthContext'
+import './Auth.css'
 
 const SignIn = () => {
   const navigate = useNavigate()
@@ -12,6 +13,8 @@ const SignIn = () => {
     username: '',
     password: '',
   })
+
+  const { username, password } = formData
 
   const handleChange = (evt) => {
     setMessage('')
@@ -30,40 +33,45 @@ const SignIn = () => {
   }
 
   return (
-    <main>
-      <h1>Sign In</h1>
-      <p>{message}</p>
+    <main className="auth-page">
+      <div className="auth-card">
+        <h1>Sign In</h1>
 
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={formData.username}
-            name="username"
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {message && <p className="auth-message">{message}</p>}
 
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={formData.password}
-            name="password"
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <form className="auth-form" autoComplete="off" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div>
-          <button type="submit">Sign In</button>
-          <button type="button" onClick={() => navigate('/')}>Cancel</button>
-        </div>
-      </form>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="auth-buttons">
+            <button type="submit">Sign In</button>
+            <button type="button" onClick={() => navigate('/')}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </main>
   )
 }
